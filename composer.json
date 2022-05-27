@@ -1,0 +1,26 @@
+{
+  "name":"hasokeyk/surat-kargo-php",
+  "authors":[
+    {
+      "name":"Hasan Yüksektepe",
+      "email":"hasanhasokeyk@hotmail.com",
+      "homepage":"https://hayatikodla.net",
+      "role":"Developer"
+    }
+  ],
+  "type":"library",
+  "keywords":[
+    "Sürat Kargo"
+  ],
+  "homepage":"https://hayatikodla.net",
+  "license":"MIT",
+  "minimum-stability":"stable",
+  "require":{
+    "ext-json":"*"
+  },
+  "autoload":{
+    "psr-4":{
+      "Hasokeyk\\SuratKargo\\":"src/SuratKargo"
+    }
+  }
+}
