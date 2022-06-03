@@ -3,6 +3,7 @@
     namespace Hasokeyk\SuratKargo;
 
     use Exception;
+    use SoapFault;
 
     class SuratKargo{
 
@@ -22,43 +23,45 @@
 
             $this->username = $data['username'];
             $this->password = $data['password'];
-            $this->dealerNo = $data['dealerNo'];
-
-            $this->lang     = $data['lang'] ?? $this->lang;
-            $this->testMode = $data['test'] ?? $this->testMode;
 
             $this->query();
         }
 
         function query(){
             $url         = $this->liveRequest;
-            $this->query = new \SoapClient($url);
+            $this->query = new \SoapClient($url, ['trace' => 1]);
         }
 
         function createCargo($data = []){
 
             $defaults = [
-                'KisiKurum'                => 'Hasan Yüksektepe',
+                'KisiKurum'                => '',
                 'SahisBirim'               => '',
                 'AliciAdresi'              => '',
                 'Il'                       => '',
                 'Ilce'                     => '',
+                'TelefonEv'                => '',
+                'TelefonIs'                => '',
                 'TelefonCep'               => '',
-                'AliciKodu'                => '1',
+                'Email'                    => '',
+                'AliciKodu'                => '',
                 'KargoTuru'                => 3,
                 'Odemetipi'                => 1,
-                'TeslimSekli'              => 2,
-                'TasimaSekli'              => 1,
                 'IrsaliyeSeriNo'           => '',
                 'IrsaliyeSiraNo'           => '',
                 'ReferansNo'               => '',
                 'OzelKargoTakipNo'         => '',
-                'Adet'                     => '1',
-                'BirimDesi'                => '',
-                'BirimKg'                  => '',
+                'Adet'                     => 1,
+                'BirimDesi'                => 0,
+                'BirimKg'                  => 0,
                 'KargoIcerigi'             => '',
                 'KapidanOdemeTahsilatTipi' => 0,
                 'KapidanOdemeTutari'       => 0,
+                'EkHizmetler'              => 0,
+                'SevkAdresiAdi'            => '',
+                'TeslimSekli'              => 1,
+                'TasimaSekli'              => 1,
+                'BayiNo'                   => '',
             ];
 
             $data = array_merge($defaults, $data);
@@ -69,10 +72,15 @@
                 'Gonderi'      => $data,
             ];
 
+            print_r($cargoData);
+
             try{
-                return $this->query->GonderiyiKargoyaGonder($cargoData);
+                $r = $this->query->GonderiyiKargoyaGonder($cargoData);
+                $this->query->__getLastRequest();
+                return $r;
             }catch(Exception $e){
-                print_r('Hata : '.$e->getMessage());
+                print_r($this->query->__getLastRequest());
+                print_r('Gönderi Hatası : '.$e->getMessage());
             }
 
         }

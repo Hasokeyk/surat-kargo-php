@@ -14,11 +14,14 @@
 
     //CREATE CARGO
     $kargoYolla = $surat_kargo->createCargo([
-        'cargoKey'         => 'HSN-0000001',
-        'invoiceKey'       => 'TEST-0000001',
-        'receiverCustName' => 'Hasan Yüksektepe',
-        'receiverAddress'  => 'Test Adres',
-        'receiverPhone1'   => '05414233558',
+        'OzelKargoTakipNo' => '123456789',
+        'AliciKodu'        => '123456789',
+        'KisiKurum'        => 'İbrahim Tatlıses',
+        'TelefonCep'       => '5330482781',
+        'AliciAdresi'      => 'Abdurrahmangazi mh. Keskin Sk. No:27-29 D:2 Sancaktepe/İstanbul',
+        'Il'               => 'İstanbul',
+        'Ilce'             => 'Sancaktepe',
+        'Odemetipi'        => 2,
     ]);
     print_r($kargoYolla);
     //CREATE CARGO
