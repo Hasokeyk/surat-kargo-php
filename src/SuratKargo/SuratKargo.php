@@ -7,7 +7,7 @@
 
     class SuratKargo{
 
-        public $liveRequest = 'http://www.suratkargo.com.tr/GonderiWebServiceGercek/service.asmx?WSDL';
+        public $liveRequest = 'https://www.suratkargo.com.tr/GonderiWebServiceGercek/Service.asmx?WSDL';
         public $username;
         public $password;
         public $dealerNo;
@@ -72,10 +72,8 @@
                 'Gonderi'      => $data,
             ];
 
-            print_r($cargoData);
-
             try{
-                $r = $this->query->GonderiyiKargoyaGonder($cargoData);
+                $r = $this->query->YurtDisiGonderiyiKargoyaGonder($cargoData);
                 $this->query->__getLastRequest();
                 return $r;
             }catch(Exception $e){
